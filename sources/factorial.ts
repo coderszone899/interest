@@ -65,16 +65,16 @@ function simplifyfactorials_(p1: U): U {
 }
 
 function sfac_product(p1: U) {
-  let terms:U[]=[];
+  var terms:U[]=[];
   if (iscons(p1)) {
     terms = p1.tail();
   }
 
-  for (let i = 0; i < terms.length; i++) {
+  for (var i = 0; i < terms.length; i++) {
     if (terms[i] === symbol(NIL)) {
       continue;
     }
-    for (let j = i + 1; j < terms.length; j++) {
+    for (var j = i + 1; j < terms.length; j++) {
       if (terms[j] === symbol(NIL)) {
         continue;
       }
@@ -82,9 +82,9 @@ function sfac_product(p1: U) {
     }
   }
 
-  let result:U = Constants.one;
+  var result:U = Constants.one;
 
-  for (let i = 0; i < terms.length; i++) {
+  for (var i = 0; i < terms.length; i++) {
     if (terms[i] === symbol(NIL)) {
       continue;
     }
@@ -95,10 +95,10 @@ function sfac_product(p1: U) {
 }
 
 function sfac_product_f(s: U[], a: number, b: number) {
-  let p3: U, p4: U;
+  var p3: U, p4: U;
 
-  let p1 = s[a];
-  let p2 = s[b];
+  var p1 = s[a];
+  var p2 = s[b];
 
   if (ispower(p1)) {
     p3 = caddr(p1);
@@ -115,7 +115,7 @@ function sfac_product_f(s: U[], a: number, b: number) {
   }
 
   if (isfactorial(p1) && isfactorial(p2)) {
-    let n = nativeInt(yyexpand(add(p3, p4)));
+    var n = nativeInt(yyexpand(add(p3, p4)));
     if (n !== 0) {
       return;
     }
@@ -137,8 +137,8 @@ function sfac_product_f(s: U[], a: number, b: number) {
       p4 = temp2;
     }
 
-    let temp3: U = Constants.one;
-    for (let i = 1; i <= n; i++) {
+    var temp3: U = Constants.one;
+    for (var i = 1; i <= n; i++) {
       temp3 = multiply(temp3, power(add(cadr(p2), integer(i)), p3));
     }
     s[a] = temp3;

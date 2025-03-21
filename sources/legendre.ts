@@ -68,14 +68,14 @@ function legendre(X: U, N: U, M: U): U {
 }
 
 function __legendre(X: U, N: U, M: U): U {
-  let n = nativeInt(N);
-  let m = nativeInt(M);
+  var n = nativeInt(N);
+  var m = nativeInt(M);
 
   if (n < 0 || isNaN(n) || m < 0 || isNaN(m)) {
     return makeList(symbol(LEGENDRE), X, N, M);
   }
 
-  let result: U;
+  var result: U;
   if (issymbol(X)) {
     result = __legendre2(n, m, X);
   } else {
@@ -87,8 +87,8 @@ function __legendre(X: U, N: U, M: U): U {
 }
 
 function __legendre2(n: number, m: number, X: U): U {
-  let Y0: U = Constants.zero;
-  let Y1: U = Constants.one;
+  var Y0: U = Constants.zero;
+  var Y1: U = Constants.one;
 
   //  i=1  Y0 = 0
   //    Y1 = 1
@@ -101,7 +101,7 @@ function __legendre2(n: number, m: number, X: U): U {
   //  i=3  Y0 = x
   //    Y1 = -1/2 + 3/2*x^2
   //    ((2*i+1)*x*Y1 - i*Y0) / i = -3/2*x + 5/2*x^3
-  for (let i = 0; i < n; i++) {
+  for (var i = 0; i < n; i++) {
     const divided = divide(
       subtract(
         multiply(multiply(integer(2 * i + 1), X), Y1),
@@ -113,7 +113,7 @@ function __legendre2(n: number, m: number, X: U): U {
     Y1 = divided;
   }
 
-  for (let i = 0; i < m; i++) {
+  for (var i = 0; i < m; i++) {
     Y1 = derivative(Y1, X);
   }
 
@@ -126,14 +126,14 @@ function __legendre3(p1: U, m: number, X: U): U | undefined {
     return;
   }
 
-  let base = subtract(Constants.one, square(X));
+  var base = subtract(Constants.one, square(X));
   if (car(X) === symbol(COS)) {
     base = square(sine(cadr(X)));
   } else if (car(X) === symbol(SIN)) {
     base = square(cosine(cadr(X)));
   }
 
-  let result = multiply(p1, power(base, multiply(integer(m), rational(1, 2))));
+  var result = multiply(p1, power(base, multiply(integer(m), rational(1, 2))));
 
   if (m % 2) {
     result = negate(result);

@@ -14,8 +14,8 @@ import { multiply } from './multiply';
     variable expression
 */
 export function partition(p1: U, p2: U): [U, U] {
-  let p3: U = Constants.one;
-  let p4: U = p3;
+  var p3: U = Constants.one;
+  var p4: U = p3;
 
   p1 = cdr(p1);
   if (!iscons(p1)) {

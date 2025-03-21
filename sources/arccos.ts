@@ -103,7 +103,7 @@ function arccos(x: U): U {
     return makeList(symbol(ARCCOS), x);
   }
 
-  const n = nativeInt(multiply(x, integer(2)));
+  let n = nativeInt(multiply(x, integer(2)));
   switch (n) {
     case -2:
       return Constants.Pi();

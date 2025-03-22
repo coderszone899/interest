@@ -14,10 +14,10 @@ export function qadd(qadd_frac1: Num, qadd_frac2: Num): Num | Double {
   // a, qadd_ab, b, qadd_ba, c are all bigNum
   // we are adding the fractions qadd_frac1 + qadd_frac2 i.e.
   // qadd_frac1.q.a/qadd_frac1.q.b + qadd_frac2.q.a/qadd_frac2.q.b
-  const qadd_ab = mmul(qadd_frac1.q.a, qadd_frac2.q.b);
-  const qadd_ba = mmul(qadd_frac1.q.b, qadd_frac2.q.a);
+  var qadd_ab = mmul(qadd_frac1.q.a, qadd_frac2.q.b);
+  var qadd_ba = mmul(qadd_frac1.q.b, qadd_frac2.q.a);
 
-  const qadd_numerator = madd(qadd_ab, qadd_ba);
+  var qadd_numerator = madd(qadd_ab, qadd_ba);
 
   //mfree(qadd_ab)
   //mfree(qadd_ba)
@@ -30,7 +30,7 @@ export function qadd(qadd_frac1: Num, qadd_frac2: Num): Num | Double {
     return Constants.zero;
   }
 
-  const qadd_denominator = mmul(qadd_frac1.q.b, qadd_frac2.q.b);
+  var qadd_denominator = mmul(qadd_frac1.q.b, qadd_frac2.q.b);
 
   let gcdBetweenNumeratorAndDenominator = mgcd(
     qadd_numerator,
@@ -46,9 +46,9 @@ export function qadd(qadd_frac1: Num, qadd_frac2: Num): Num | Double {
   //console.log "qadd qadd_denominator: " + qadd_denominator
   //console.log "qadd gcdBetweenNumeratorAndDenominator: " + gcdBetweenNumeratorAndDenominator
 
-  const a = mdiv(qadd_numerator, gcdBetweenNumeratorAndDenominator);
-  const b = mdiv(qadd_denominator, gcdBetweenNumeratorAndDenominator);
-  const resultSum = new Num(a, b);
+  var a = mdiv(qadd_numerator, gcdBetweenNumeratorAndDenominator);
+  var b = mdiv(qadd_denominator, gcdBetweenNumeratorAndDenominator);
+  var resultSum = new Num(a, b);
 
   //console.log "qadd resultSum.q.a: " + resultSum.q.a
   //console.log "qadd resultSum.q.b: " + resultSum.q.b

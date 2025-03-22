@@ -30,9 +30,9 @@ Returns the degree of polynomial p(x).
 
 */
 export function Eval_degree(p1: U) {
-  const poly = Eval(cadr(p1));
+  let poly = Eval(cadr(p1));
   p1 = Eval(caddr(p1));
-  const variable = p1 === symbol(NIL) ? guess(poly) : p1;
+  let variable = p1 === symbol(NIL) ? guess(poly) : p1;
   return degree(poly, variable);
 }
 

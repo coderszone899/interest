@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.dirac = exports.Eval_dirac = void 0;
-const defs_1 = require("../runtime/defs");
-const stack_1 = require("../runtime/stack");
-const eval_1 = require("./eval");
-const is_1 = require("./is");
-const list_1 = require("./list");
-const mmul_1 = require("./mmul");
-const multiply_1 = require("./multiply");
+let defs_1 = require("../runtime/defs");
+let stack_1 = require("../runtime/stack");
+let eval_1 = require("./eval");
+let is_1 = require("./is");
+let list_1 = require("./list");
+let mmul_1 = require("./mmul");
+let multiply_1 = require("./multiply");
 //-----------------------------------------------------------------------------
 //
 //  Author : philippe.billet@noos.fr
@@ -17,7 +17,7 @@ const multiply_1 = require("./multiply");
 //  dirac(b-a)=dirac(a-b)
 //-----------------------------------------------------------------------------
 function Eval_dirac(p1) {
-    const result = dirac(eval_1.Eval(defs_1.cadr(p1)));
+    let result = dirac(eval_1.Eval(defs_1.cadr(p1)));
     stack_1.push(result);
 }
 exports.Eval_dirac = Eval_dirac;

@@ -36,7 +36,7 @@ Returns expression x with circular and hyperbolic functions converted to exponen
 
 */
 export function Eval_circexp(p1: U) {
-  const result = circexp(Eval(cadr(p1)));
+  let result = circexp(Eval(cadr(p1)));
   return Eval(result);
 }
 
@@ -51,8 +51,8 @@ function circexp(p1: U): U {
 
   if (car(p1) === symbol(TAN)) {
     p1 = cadr(p1);
-    const p2 = exponential(multiply(Constants.imaginaryunit, p1));
-    const p3 = exponential(negate(multiply(Constants.imaginaryunit, p1)));
+    let p2 = exponential(multiply(Constants.imaginaryunit, p1));
+    let p3 = exponential(negate(multiply(Constants.imaginaryunit, p1)));
 
     return divide(
       multiply(subtract(p3, p2), Constants.imaginaryunit),

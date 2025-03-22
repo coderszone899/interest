@@ -39,7 +39,7 @@ function arccosh(x: U): U {
   }
 
   if (isdouble(x)) {
-    let { d } = x;
+    const { d } = x;
     if (d < 1.0) {
       stop('arccosh function argument is less than 1.0');
     }

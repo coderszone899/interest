@@ -47,7 +47,7 @@ function tangent(p1: U): U {
   // (e.g. 60 degrees is 1/3 pi) but that's more
   // convoluted as we'd need to look at both numerator and
   // denominator.
-  const n = nativeInt(divide(multiply(p1, integer(180)), Constants.Pi()));
+  var n = nativeInt(divide(multiply(p1, integer(180)), Constants.Pi()));
 
   // most "good" (i.e. compact) trigonometric results
   // happen for a round number of degrees. There are some exceptions

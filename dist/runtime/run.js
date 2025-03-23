@@ -1,19 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.computeResultsAndJavaScriptFromAlgebra = exports.computeDependenciesFromAlgebra = exports.check_esc_flag = exports.top_level_eval = exports.check_stack = exports.run = exports.findDependenciesInScript = exports.stop = void 0;
-const stack_1 = require("./stack");
-const bake_1 = require("../sources/bake");
-const clear_1 = require("../sources/clear");
-const eval_1 = require("../sources/eval");
-const is_1 = require("../sources/is");
-const print_1 = require("../sources/print");
-const print2d_1 = require("../sources/print2d");
-const scan_1 = require("../sources/scan");
-const simplify_1 = require("../sources/simplify");
-const subst_1 = require("../sources/subst");
-const defs_1 = require("./defs");
-const init_1 = require("./init");
-const symbol_1 = require("./symbol");
+var stack_1 = require("./stack");
+var bake_1 = require("../sources/bake");
+var clear_1 = require("../sources/clear");
+var eval_1 = require("../sources/eval");
+var is_1 = require("../sources/is");
+var print_1 = require("../sources/print");
+var print2d_1 = require("../sources/print2d");
+var scan_1 = require("../sources/scan");
+var simplify_1 = require("../sources/simplify");
+var subst_1 = require("../sources/subst");
+var defs_1 = require("./defs");
+var init_1 = require("./init");
+var symbol_1 = require("./symbol");
 //jmp_buf stop_return, draw_stop_return
 // s is a string here
 function stop(s) {
@@ -23,7 +23,7 @@ function stop(s) {
     defs_1.defs.errorMessage += 'Stop: ';
     defs_1.defs.errorMessage += s;
     //breakpoint
-    const message = defs_1.defs.errorMessage;
+    var message = defs_1.defs.errorMessage;
     defs_1.defs.errorMessage = '';
     stack_1.moveTos(0);
     throw new Error(message);
@@ -63,8 +63,8 @@ function findDependenciesInScript(stringToBeParsed, dontGenerateCode = false) {
     if (defs_1.DEBUG) {
         console.log(`stringToBeParsed: ${stringToBeParsed}`);
     }
-    const timeStartFromAlgebra = new Date().getTime();
-    const inited = true;
+    var timeStartFromAlgebra = new Date().getTime();
+    var inited = true;
     defs_1.defs.codeGen = true;
     defs_1.defs.symbolsDependencies = {};
     defs_1.defs.symbolsHavingReassignments = [];
@@ -78,11 +78,11 @@ function findDependenciesInScript(stringToBeParsed, dontGenerateCode = false) {
     // so all affected variables in the whole block are lumped
     // together, and same for the variable that affect those, we
     // lump them all together.
-    const dependencyInfo = {
+    var dependencyInfo = {
         affectsVariables: [],
         affectedBy: [],
     };
-    const stringToBeRun = stringToBeParsed;
+    var stringToBeRun = stringToBeParsed;
     // parse the input. This collects the
     // dependency information
     while (true) {
@@ -121,7 +121,7 @@ function findDependenciesInScript(stringToBeParsed, dontGenerateCode = false) {
     }
     testableString += 'All local dependencies: ';
     for (let key in defs_1.defs.symbolsDependencies) {
-        const value = defs_1.defs.symbolsDependencies[key];
+        var value = defs_1.defs.symbolsDependencies[key];
         if (defs_1.DEBUG) {
             console.log(`variable ${key} depends on: `);
         }
@@ -187,7 +187,7 @@ function findDependenciesInScript(stringToBeParsed, dontGenerateCode = false) {
             allReturnedLatexStrings = '';
         }
         catch (error2) {
-            const error = error2;
+            var error = error2;
             if (defs_1.PRINTOUTRESULT) {
                 console.log(error);
             }
@@ -210,8 +210,8 @@ function findDependenciesInScript(stringToBeParsed, dontGenerateCode = false) {
                 }
                 testableString += ' variable ' + key + ' depends on: ';
                 var recursedDependencies = [];
-                const variablesWithCycles = [];
-                const cyclesDescriptions = [];
+                var variablesWithCycles = [];
+                var cyclesDescriptions = [];
                 recursiveDependencies(key, recursedDependencies, [], variablesWithCycles, [], cyclesDescriptions);
                 for (let i of Array.from(variablesWithCycles)) {
                     if (defs_1.DEBUG) {
@@ -255,13 +255,13 @@ function findDependenciesInScript(stringToBeParsed, dontGenerateCode = false) {
                 // case we directly create this one, which means that we'll have
                 // to rename it later to the correct name without the prepended
                 // part.
-                const replacementsFrom = [];
-                const replacementsTo = [];
+                var replacementsFrom = [];
+                var replacementsTo = [];
                 for (let eachDependency of Array.from(recursedDependencies)) {
                     if (eachDependency[0] === "'") {
-                        const deQuotedDep = eachDependency.substring(1);
-                        const originalUserSymbol = symbol_1.usr_symbol(deQuotedDep);
-                        const newUserSymbol = symbol_1.usr_symbol('AVOID_BINDING_TO_EXTERNAL_SCOPE_VALUE' + deQuotedDep);
+                        var deQuotedDep = eachDependency.substring(1);
+                        var originalUserSymbol = symbol_1.usr_symbol(deQuotedDep);
+                        var newUserSymbol = symbol_1.usr_symbol('AVOID_BINDING_TO_EXTERNAL_SCOPE_VALUE' + deQuotedDep);
                         replacementsFrom.push(originalUserSymbol);
                         replacementsTo.push(newUserSymbol);
                         stack_1.push(subst_1.subst(stack_1.pop(), originalUserSymbol, newUserSymbol));
@@ -287,7 +287,7 @@ function findDependenciesInScript(stringToBeParsed, dontGenerateCode = false) {
                 }
                 clear_1.clearRenamedVariablesToAvoidBindingToExternalScope();
                 if (defs_1.defs.errorMessage === '') {
-                    const toBePrinted = stack_1.pop();
+                    var toBePrinted = stack_1.pop();
                     // we have to get all the variables used on the right side
                     // here. I.e. to print the arguments it's better to look at the
                     // actual method body after simplification.
@@ -296,11 +296,11 @@ function findDependenciesInScript(stringToBeParsed, dontGenerateCode = false) {
                     allReturnedPlainStrings = '';
                     allReturnedLatexStrings = '';
                     defs_1.defs.codeGen = true;
-                    const generatedBody = toBePrinted.toString();
+                    var generatedBody = toBePrinted.toString();
                     defs_1.defs.codeGen = false;
-                    const origPrintMode = defs_1.defs.printMode;
+                    var origPrintMode = defs_1.defs.printMode;
                     defs_1.defs.printMode = defs_1.PRINTMODE_LATEX;
-                    const bodyForReadableSummaryOfGeneratedCode = toBePrinted.toString();
+                    var bodyForReadableSummaryOfGeneratedCode = toBePrinted.toString();
                     defs_1.defs.printMode = origPrintMode;
                     if (variablesWithCycles.indexOf(key) !== -1) {
                         generatedCode +=
@@ -476,7 +476,7 @@ function recursiveDependencies(variableToBeChecked, arrayWhereDependenciesWillBe
         arrayWhereDependenciesWillBeAdded;
     }
 }
-const latexErrorSign = '\\rlap{\\large\\color{red}\\bigtriangleup}{\\ \\ \\tiny\\color{red}!}';
+var latexErrorSign = '\\rlap{\\large\\color{red}\\bigtriangleup}{\\ \\ \\tiny\\color{red}!}';
 function turnErrorMessageToLatex(theErrorMessage) {
     theErrorMessage = theErrorMessage.replace(/\n/g, '');
     theErrorMessage = theErrorMessage.replace(/_/g, '} \\_ \\text{');
@@ -504,7 +504,7 @@ var TIMING_DEBUGS = false;
 function run(stringToBeRun, generateLatex = false) {
     let p1, p2;
     let stringToBeReturned;
-    const timeStart = new Date().getTime();
+    var timeStart = new Date().getTime();
     //stringToBeRun = stringToBeRun + "\n"
     stringToBeRun = normaliseDots(stringToBeRun);
     //console.log "run running: " + stringToBeRun
@@ -542,7 +542,7 @@ function run(stringToBeRun, generateLatex = false) {
             allReturnedPlainStrings += error.message;
             if (generateLatex) {
                 //breakpoint
-                const theErrorMessage = turnErrorMessageToLatex(error.message);
+                var theErrorMessage = turnErrorMessageToLatex(error.message);
                 allReturnedLatexStrings += theErrorMessage;
             }
             defs_1.reset_after_error();
@@ -663,7 +663,7 @@ function run(stringToBeRun, generateLatex = false) {
         stringToBeReturned = allReturnedPlainStrings;
     }
     if (TIMING_DEBUGS) {
-        const timingDebugWrite = 'run time on: ' +
+        var timingDebugWrite = 'run time on: ' +
             stringToBeRun +
             ' : ' +
             (new Date().getTime() - timeStart) +
@@ -705,9 +705,9 @@ function top_level_eval() {
         console.log('#### top level eval');
     }
     defs_1.defs.trigmode = 0;
-    const shouldAutoexpand = defs_1.symbol(defs_1.AUTOEXPAND);
+    var shouldAutoexpand = defs_1.symbol(defs_1.AUTOEXPAND);
     defs_1.defs.expanding = !is_1.isZeroAtomOrTensor(symbol_1.get_binding(shouldAutoexpand));
-    const originalArgument = stack_1.top();
+    var originalArgument = stack_1.top();
     stack_1.push(eval_1.Eval(stack_1.pop()));
     let evalledArgument = stack_1.top();
     // "draw", "for" and "setq" return "nil", there is no result to print
@@ -717,7 +717,7 @@ function top_level_eval() {
     // update "last" to contain the last result
     symbol_1.set_binding(defs_1.symbol(defs_1.LAST), evalledArgument);
     if (!is_1.isZeroAtomOrTensor(symbol_1.get_binding(defs_1.symbol(defs_1.BAKE)))) {
-        const baked = bake_1.bake(stack_1.pop());
+        var baked = bake_1.bake(stack_1.pop());
         evalledArgument = baked;
         stack_1.push(baked);
     }
@@ -767,15 +767,15 @@ function computeDependenciesFromAlgebra(codeFromAlgebraBlock) {
     // return findDependenciesInScript(codeFromAlgebraBlock, true)[6]
     // TODO this part below is duplicated from computeResultsAndJavaScriptFromAlgebra
     //      ...should refactor.
-    const originalcodeFromAlgebraBlock = codeFromAlgebraBlock;
-    const keepState = true;
+    var originalcodeFromAlgebraBlock = codeFromAlgebraBlock;
+    var keepState = true;
     defs_1.defs.called_from_Algebra_block = true;
     //console.log "codeFromAlgebraBlock: " + codeFromAlgebraBlock
     codeFromAlgebraBlock = normaliseDots(codeFromAlgebraBlock);
     if (!keepState) {
         defs_1.defs.userSimplificationsInListForm = [];
         let userSimplificationsInProgramForm = '';
-        for (const i of Array.from(defs_1.defs.userSimplificationsInListForm)) {
+        for (var i of Array.from(defs_1.defs.userSimplificationsInListForm)) {
             //console.log "silentpattern(" + car(i) + ","+cdr(i)+")"
             userSimplificationsInProgramForm +=
                 'silentpattern(' +
@@ -795,7 +795,7 @@ function computeDependenciesFromAlgebra(codeFromAlgebraBlock) {
     }
     if (defs_1.DEBUG) {
         console.log('computeDependenciesFromAlgebra: patterns in the list --------------- ');
-        for (const i of Array.from(defs_1.defs.userSimplificationsInListForm)) {
+        for (var i of Array.from(defs_1.defs.userSimplificationsInListForm)) {
             console.log(defs_1.car(i) + ',' + defs_1.cdr(i) + ')');
         }
         console.log('...end of list --------------- ');
@@ -807,10 +807,10 @@ exports.computeDependenciesFromAlgebra = computeDependenciesFromAlgebra;
 function computeResultsAndJavaScriptFromAlgebra(codeFromAlgebraBlock) {
     let p1, p6;
     let code, dependencyInfo, i, latexResult, readableSummaryOfCode, result, testableStringIsIgnoredHere;
-    const originalcodeFromAlgebraBlock = codeFromAlgebraBlock;
-    const keepState = true;
+    var originalcodeFromAlgebraBlock = codeFromAlgebraBlock;
+    var keepState = true;
     defs_1.defs.called_from_Algebra_block = true;
-    const timeStartFromAlgebra = new Date().getTime();
+    var timeStartFromAlgebra = new Date().getTime();
     if (TIMING_DEBUGS) {
         console.log(' --------- computeResultsAndJavaScriptFromAlgebra input: ' +
             codeFromAlgebraBlock +
@@ -822,7 +822,7 @@ function computeResultsAndJavaScriptFromAlgebra(codeFromAlgebraBlock) {
     // the "starting" symbols.
     //console.log "codeFromAlgebraBlock: " + codeFromAlgebraBlock
     codeFromAlgebraBlock = normaliseDots(codeFromAlgebraBlock);
-    const stringToBeRun = codeFromAlgebraBlock;
+    var stringToBeRun = codeFromAlgebraBlock;
     if (defs_1.DEBUG) {
         console.log('computeResultsAndJavaScriptFromAlgebra: patterns in the list --------------- ');
         for (i of Array.from(defs_1.defs.userSimplificationsInListForm)) {

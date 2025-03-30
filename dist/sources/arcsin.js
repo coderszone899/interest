@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Eval_arcsin = void 0;
-const defs_1 = require("../runtime/defs");
-const stack_1 = require("../runtime/stack");
-const bignum_1 = require("./bignum");
-const eval_1 = require("./eval");
-const is_1 = require("./is");
-const list_1 = require("./list");
-const multiply_1 = require("./multiply");
+let defs_1 = require("../runtime/defs");
+let stack_1 = require("../runtime/stack");
+let bignum_1 = require("./bignum");
+let eval_1 = require("./eval");
+let is_1 = require("./is");
+let list_1 = require("./list");
+let multiply_1 = require("./multiply");
 /* arcsin =====================================================================
 
 Tags
@@ -71,7 +71,7 @@ function arcsin(x) {
     if (!defs_1.isrational(x)) {
         return list_1.makeList(defs_1.symbol(defs_1.ARCSIN), x);
     }
-    const n = bignum_1.nativeInt(multiply_1.multiply(x, bignum_1.integer(2)));
+    let n = bignum_1.nativeInt(multiply_1.multiply(x, bignum_1.integer(2)));
     switch (n) {
         case -2:
             return defs_1.defs.evaluatingAsFloats

@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.hilbert = void 0;
-const defs_1 = require("../runtime/defs");
-const misc_1 = require("../sources/misc");
-const bignum_1 = require("./bignum");
-const list_1 = require("./list");
-const multiply_1 = require("./multiply");
+var defs_1 = require("../runtime/defs");
+var misc_1 = require("../sources/misc");
+var bignum_1 = require("./bignum");
+var list_1 = require("./list");
+var multiply_1 = require("./multiply");
 //-----------------------------------------------------------------------------
 //
 //  Create a Hilbert matrix
@@ -22,11 +22,11 @@ const multiply_1 = require("./multiply");
 //-----------------------------------------------------------------------------
 //define AELEM(i, j) A->u.tensor->elem[i * n + j]
 function hilbert(N) {
-    const n = bignum_1.nativeInt(N);
+    var n = bignum_1.nativeInt(N);
     if (n < 2) {
         return list_1.makeList(defs_1.symbol(defs_1.HILBERT), N);
     }
-    const A = misc_1.zero_matrix(n, n);
+    var A = misc_1.zero_matrix(n, n);
     for (let i = 0; i < n; i++) {
         for (let j = 0; j < n; j++) {
             A.tensor.elem[i * n + j] = multiply_1.inverse(bignum_1.integer(i + j + 1));

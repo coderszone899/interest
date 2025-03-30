@@ -58,9 +58,9 @@ function qpowf(BASE: Num, EXPO: Num): U {
     return BASE;
   }
 
-  let expo = 0;
-  let x: bigInt.BigInteger | 0;
-  let y: bigInt.BigInteger;
+  var expo = 0;
+  var x: bigInt.BigInteger | 0;
+  var y: bigInt.BigInteger;
   // if exponent is integer then power
   if (isinteger(EXPO)) {
     expo = nativeInt(EXPO);
@@ -171,16 +171,16 @@ function normalize_angle(A: Num): U {
   }
 
   // floor
-  let Q = bignum_truncate(A);
+  var Q = bignum_truncate(A);
   if (isnegativenumber(A)) {
     Q = add(Q, Constants.negOne) as Num;
   }
 
   // remainder (always positive)
-  let R = subtract(A, Q);
+  var R = subtract(A, Q);
 
   // remainder becomes new angle
-  let result = makeList(symbol(POWER), Constants.negOne, R);
+  var result = makeList(symbol(POWER), Constants.negOne, R);
 
   // negate if quotient is odd
   if (Q.q.a.isOdd()) {

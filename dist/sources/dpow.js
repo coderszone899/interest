@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.dpow = void 0;
-const defs_1 = require("../runtime/defs");
-const run_1 = require("../runtime/run");
-const add_1 = require("./add");
-const bignum_1 = require("./bignum");
-const multiply_1 = require("./multiply");
+var defs_1 = require("../runtime/defs");
+var run_1 = require("../runtime/run");
+var add_1 = require("./add");
+var bignum_1 = require("./bignum");
+var multiply_1 = require("./multiply");
 // power function for double precision floating point
 function dpow(base, expo) {
     // divide by zero?
@@ -16,8 +16,8 @@ function dpow(base, expo) {
     if (base >= 0.0 || expo % 1.0 === 0.0) {
         return bignum_1.double(Math.pow(base, expo));
     }
-    const result = Math.pow(Math.abs(base), expo);
-    const theta = Math.PI * expo;
+    var result = Math.pow(Math.abs(base), expo);
+    var theta = Math.PI * expo;
     let a = 0.0;
     let b = 0.0;
     // this ensures the real part is 0.0 instead of a tiny fraction

@@ -1,8 +1,8 @@
 import { run_test } from '../test-harness';
 
-const gcdTests = [];
+let gcdTests = [];
 
-const GCD_TESTS_DONT_TEST_FACTOR = 1;
+let GCD_TESTS_DONT_TEST_FACTOR = 1;
 
 function addGcdTest(arg1, arg2, result, dontTestFactor?: any) {
   gcdTests.push('gcd(' + arg1 + ',' + arg2 + ')');

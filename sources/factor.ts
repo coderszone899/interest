@@ -23,9 +23,9 @@ import { factor_number } from './pollard';
 
 // factor a polynomial or integer
 export function Eval_factor(p1: U) {
-  const top = Eval(cadr(p1));
-  const p2 = Eval(caddr(p1));
-  const variable = p2 === symbol(NIL) ? guess(top) : p2;
+  var top = Eval(cadr(p1));
+  var p2 = Eval(caddr(p1));
+  var variable = p2 === symbol(NIL) ? guess(top) : p2;
   let temp = factor(top, variable);
 
   // more factoring?
@@ -38,18 +38,18 @@ export function Eval_factor(p1: U) {
 
 function factor_again(p1: U, p2: U): U {
   if (ismultiply(p1)) {
-    const arr: U[] = [];
+    var arr: U[] = [];
     p1.tail().forEach((el) => factor_term(arr, el, p2));
     return multiply_all_noexpand(arr);
   }
 
-  const arr: U[] = [];
+  var arr: U[] = [];
   factor_term(arr, p1, p2);
   return arr[0];
 }
 
 function factor_term(arr: U[], arg1: U, arg2: U): void {
-  const p1 = factorpoly(arg1, arg2);
+  var p1 = factorpoly(arg1, arg2);
   if (ismultiply(p1)) {
     arr.push(...p1.tail());
     return;
@@ -71,13 +71,13 @@ export function factor_small_number(n: number): Num[] {
   if (isNaN(n)) {
     stop('number too big to factor');
   }
-  const arr: Num[] = [];
+  var arr: Num[] = [];
   if (n < 0) {
     n = -n;
   }
 
   for (let i = 0; i < MAXPRIMETAB; i++) {
-    const d = primetab[i];
+    var d = primetab[i];
 
     if (d > n / d) {
       break;

@@ -35,7 +35,7 @@ contract(m) is equivalent to the trace of matrix m.
 */
 export function Eval_contract(p1: U) {
   const p1_prime = Eval(cadr(p1));
-  let p2: U, p3: U;
+  var p2: U, p3: U;
   if (cddr(p1) === symbol(NIL)) {
     p2 = Constants.one;
     p3 = integer(2);
@@ -57,8 +57,8 @@ function contract(p1: U, p2: U, p3: U): U {
     return Constants.zero;
   }
 
-  let l = nativeInt(p2);
-  let m = nativeInt(p3);
+  var l = nativeInt(p2);
+  var m = nativeInt(p3);
 
   const { ndim } = p1.tensor;
 
@@ -80,8 +80,8 @@ function contract(p1: U, p2: U, p3: U): U {
 
   // nelem is the number of elements in "b"
 
-  let nelem = 1;
-  for (let i = 0; i < ndim; i++) {
+  var nelem = 1;
+  for (var i = 0; i < ndim; i++) {
     if (i !== l && i !== m) {
       nelem *= p1.tensor.dim[i];
     }
@@ -90,8 +90,8 @@ function contract(p1: U, p2: U, p3: U): U {
   p2 = alloc_tensor(nelem);
   p2.tensor.ndim = ndim - 2;
 
-  let j = 0;
-  for (let i = 0; i < ndim; i++) {
+  var j = 0;
+  for (var i = 0; i < ndim; i++) {
     if (i !== l && i !== m) {
       p2.tensor.dim[j++] = p1.tensor.dim[i];
     }
@@ -100,18 +100,18 @@ function contract(p1: U, p2: U, p3: U): U {
   const a = p1.tensor.elem;
   const b = p2.tensor.elem;
 
-  for (let i = 0; i < ndim; i++) {
+  for (var i = 0; i < ndim; i++) {
     ai[i] = 0;
     an[i] = p1.tensor.dim[i];
   }
 
-  for (let i = 0; i < nelem; i++) {
-    let temp: U = Constants.zero;
-    for (let j = 0; j < n; j++) {
+  for (var i = 0; i < nelem; i++) {
+    var temp: U = Constants.zero;
+    for (var j = 0; j < n; j++) {
       ai[l] = j;
       ai[m] = j;
-      let h = 0;
-      for (let k = 0; k < ndim; k++) {
+      var h = 0;
+      for (var k = 0; k < ndim; k++) {
         h = h * an[k] + ai[k];
       }
       //console.log "a[h]: " + a[h]
@@ -120,7 +120,7 @@ function contract(p1: U, p2: U, p3: U): U {
     //console.log "tos: " + stack[tos-1]
     b[i] = temp;
     //console.log "b[i]: " + b[i]
-    for (let j = ndim - 1; j >= 0; j--) {
+    for (var j = ndim - 1; j >= 0; j--) {
       if (j === l || j === m) {
         continue;
       }

@@ -28,11 +28,11 @@ export function Eval_float(p1: U) {
 }
 
 function checkFloatHasWorkedOutCompletely(nodeToCheck) {
-  const numberOfPowers = countOccurrencesOfSymbol(symbol(POWER), nodeToCheck);
-  const numberOfPIs = countOccurrencesOfSymbol(symbol(PI), nodeToCheck);
-  const numberOfEs = countOccurrencesOfSymbol(symbol(E), nodeToCheck);
-  const numberOfMults = countOccurrencesOfSymbol(symbol(MULTIPLY), nodeToCheck);
-  const numberOfSums = countOccurrencesOfSymbol(symbol(ADD), nodeToCheck);
+  let numberOfPowers = countOccurrencesOfSymbol(symbol(POWER), nodeToCheck);
+  let numberOfPIs = countOccurrencesOfSymbol(symbol(PI), nodeToCheck);
+  let numberOfEs = countOccurrencesOfSymbol(symbol(E), nodeToCheck);
+  let numberOfMults = countOccurrencesOfSymbol(symbol(MULTIPLY), nodeToCheck);
+  let numberOfSums = countOccurrencesOfSymbol(symbol(ADD), nodeToCheck);
   if (DEBUG) {
     console.log(`     ... numberOfPowers: ${numberOfPowers}`);
     console.log(`     ... numberOfPIs: ${numberOfPIs}`);

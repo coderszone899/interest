@@ -1,17 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Eval_tanh = void 0;
-const defs_1 = require("../runtime/defs");
-const stack_1 = require("../runtime/stack");
-const bignum_1 = require("./bignum");
-const eval_1 = require("./eval");
-const is_1 = require("./is");
-const list_1 = require("./list");
+var defs_1 = require("../runtime/defs");
+var stack_1 = require("../runtime/stack");
+var bignum_1 = require("./bignum");
+var eval_1 = require("./eval");
+var is_1 = require("./is");
+var list_1 = require("./list");
 //             exp(2 x) - 1
 //  tanh(x) = --------------
 //             exp(2 x) + 1
 function Eval_tanh(p1) {
-    const result = tanh(eval_1.Eval(defs_1.cadr(p1)));
+    var result = tanh(eval_1.Eval(defs_1.cadr(p1)));
     stack_1.push(result);
 }
 exports.Eval_tanh = Eval_tanh;

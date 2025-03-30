@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.mgcd = void 0;
-const big_integer_1 = __importDefault(require("big-integer"));
+let big_integer_1 = __importDefault(require("big-integer"));
 //-----------------------------------------------------------------------------
 //
 //  Bignum GCD

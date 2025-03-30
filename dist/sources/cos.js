@@ -1,16 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.cosine = exports.Eval_cos = void 0;
-const defs_1 = require("../runtime/defs");
-const stack_1 = require("../runtime/stack");
-const add_1 = require("./add");
-const bignum_1 = require("./bignum");
-const eval_1 = require("./eval");
-const is_1 = require("./is");
-const list_1 = require("./list");
-const multiply_1 = require("./multiply");
-const power_1 = require("./power");
-const sin_1 = require("./sin");
+var defs_1 = require("../runtime/defs");
+var stack_1 = require("../runtime/stack");
+var add_1 = require("./add");
+var bignum_1 = require("./bignum");
+var eval_1 = require("./eval");
+var is_1 = require("./is");
+var list_1 = require("./list");
+var multiply_1 = require("./multiply");
+var power_1 = require("./power");
+var sin_1 = require("./sin");
 /* cos =====================================================================
 
 Tags
@@ -27,7 +27,7 @@ Returns the cosine of x.
 
 */
 function Eval_cos(p1) {
-    const result = cosine(eval_1.Eval(defs_1.cadr(p1)));
+    var result = cosine(eval_1.Eval(defs_1.cadr(p1)));
     stack_1.push(result);
 }
 exports.Eval_cos = Eval_cos;
@@ -41,9 +41,9 @@ exports.cosine = cosine;
 // Use angle sum formula for special angles.
 function cosine_of_angle_sum(p1) {
     if (defs_1.iscons(p1)) {
-        for (const B of p1.tail()) {
+        for (var B of p1.tail()) {
             if (is_1.isnpi(B)) {
-                const A = add_1.subtract(p1, B);
+                var A = add_1.subtract(p1, B);
                 return add_1.subtract(multiply_1.multiply(cosine(A), cosine(B)), multiply_1.multiply(sin_1.sine(A), sin_1.sine(B)));
             }
         }
@@ -68,7 +68,7 @@ function cosine_of_angle(p1) {
     // cos(arctan(x)) = 1 / sqrt(1 + x^2)
     // see p. 173 of the CRC Handbook of Mathematical Sciences
     if (defs_1.car(p1) === defs_1.symbol(defs_1.ARCTAN)) {
-        const base = add_1.add(defs_1.Constants.one, power_1.power(defs_1.cadr(p1), bignum_1.integer(2)));
+        var base = add_1.add(defs_1.Constants.one, power_1.power(defs_1.cadr(p1), bignum_1.integer(2)));
         return power_1.power(base, bignum_1.rational(-1, 2));
     }
     // multiply by 180/pi to go from radians to degrees.
@@ -80,7 +80,7 @@ function cosine_of_angle(p1) {
     // (e.g. 60 degrees is 1/3 pi) but that's more
     // convoluted as we'd need to look at both numerator and
     // denominator.
-    const n = bignum_1.nativeInt(multiply_1.divide(multiply_1.multiply(p1, bignum_1.integer(180)), defs_1.Constants.Pi()));
+    var n = bignum_1.nativeInt(multiply_1.divide(multiply_1.multiply(p1, bignum_1.integer(180)), defs_1.Constants.Pi()));
     // most "good" (i.e. compact) trigonometric results
     // happen for a round number of degrees. There are some exceptions
     // though, e.g. 22.5 degrees, which we don't capture here.

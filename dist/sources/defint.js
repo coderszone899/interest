@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Eval_defint = void 0;
-const defs_1 = require("../runtime/defs");
-const stack_1 = require("../runtime/stack");
-const add_1 = require("./add");
-const eval_1 = require("./eval");
-const integral_1 = require("./integral");
-const subst_1 = require("./subst");
+var defs_1 = require("../runtime/defs");
+var stack_1 = require("../runtime/stack");
+var add_1 = require("./add");
+var eval_1 = require("./eval");
+var integral_1 = require("./integral");
+var subst_1 = require("./subst");
 /* defint =====================================================================
 
 Tags
@@ -33,11 +33,11 @@ function Eval_defint(p1) {
     // integrals, so we loop over the
     // multiple integrals here
     while (defs_1.iscons(p1)) {
-        const X = eval_1.Eval(defs_1.car(p1));
+        var X = eval_1.Eval(defs_1.car(p1));
         p1 = defs_1.cdr(p1);
-        const A = eval_1.Eval(defs_1.car(p1));
+        var A = eval_1.Eval(defs_1.car(p1));
         p1 = defs_1.cdr(p1);
-        const B = eval_1.Eval(defs_1.car(p1));
+        var B = eval_1.Eval(defs_1.car(p1));
         p1 = defs_1.cdr(p1);
         // obtain the primitive of F against the
         // specified variable X
@@ -46,9 +46,9 @@ function Eval_defint(p1) {
         // integrals.
         F = integral_1.integral(F, X); // contains the antiderivative of F
         // evaluate the integral in A
-        const arg1 = eval_1.Eval(subst_1.subst(F, X, B));
+        var arg1 = eval_1.Eval(subst_1.subst(F, X, B));
         // evaluate the integral in B
-        const arg2 = eval_1.Eval(subst_1.subst(F, X, A));
+        var arg2 = eval_1.Eval(subst_1.subst(F, X, A));
         // integral between B and A is the
         // subtraction. Note that this could
         // be a number but also a function.

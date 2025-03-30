@@ -1,16 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Eval_eigenvec = exports.Eval_eigenval = exports.Eval_eigen = void 0;
-const defs_1 = require("../runtime/defs");
-const run_1 = require("../runtime/run");
-const stack_1 = require("../runtime/stack");
-const symbol_1 = require("../runtime/symbol");
-const bignum_1 = require("./bignum");
-const eval_1 = require("./eval");
-const float_1 = require("./float");
-const list_1 = require("./list");
-const print_1 = require("./print");
-const tensor_1 = require("./tensor");
+var defs_1 = require("../runtime/defs");
+var run_1 = require("../runtime/run");
+var stack_1 = require("../runtime/stack");
+var symbol_1 = require("../runtime/symbol");
+var bignum_1 = require("./bignum");
+var eval_1 = require("./eval");
+var float_1 = require("./float");
+var list_1 = require("./list");
+var print_1 = require("./print");
+var tensor_1 = require("./tensor");
 /* eigen =====================================================================
 
 Tags
@@ -93,10 +93,10 @@ Result:
 //define D(i, j) yydd[EIG_N * (i) + (j)]
 //define Q(i, j) yyqq[EIG_N * (i) + (j)]
 let EIG_N = 0;
-const EIG_yydd = [];
-const EIG_yyqq = [];
+var EIG_yydd = [];
+var EIG_yyqq = [];
 function Eval_eigen(p1) {
-    const { arg } = EIG_check_arg(p1);
+    var { arg } = EIG_check_arg(p1);
     if (!arg) {
         run_1.stop('eigen: argument is not a square matrix');
     }
@@ -124,12 +124,12 @@ Compute eigenvalues of m. See "eigen" for more info.
 
 */
 function Eval_eigenval(p1) {
-    const result = _eigenval(p1);
+    var result = _eigenval(p1);
     stack_1.push(result);
 }
 exports.Eval_eigenval = Eval_eigenval;
 function _eigenval(p1) {
-    const { arg, invalid } = EIG_check_arg(p1);
+    var { arg, invalid } = EIG_check_arg(p1);
     if (invalid) {
         return list_1.makeList(defs_1.symbol(defs_1.EIGENVAL), invalid);
     }
@@ -152,12 +152,12 @@ Compute eigenvectors of m. See "eigen" for more info.
 
 */
 function Eval_eigenvec(p1) {
-    const result = _eigenvec(p1);
+    var result = _eigenvec(p1);
     stack_1.push(result);
 }
 exports.Eval_eigenvec = Eval_eigenvec;
 function _eigenvec(p1) {
-    const { arg, invalid } = EIG_check_arg(p1);
+    var { arg, invalid } = EIG_check_arg(p1);
     if (invalid) {
         return list_1.makeList(defs_1.symbol(defs_1.EIGENVEC), invalid);
     }
@@ -178,8 +178,8 @@ function EIG_check_arg(p1) {
     }
     for (let i = 0; i < EIG_N - 1; i++) {
         for (let j = i + 1; j < EIG_N; j++) {
-            const eli = p1.tensor.elem[EIG_N * i + j];
-            const elj = p1.tensor.elem[EIG_N * j + i];
+            var eli = p1.tensor.elem[EIG_N * i + j];
+            var elj = p1.tensor.elem[EIG_N * j + i];
             if (Math.abs(eli.d - elj.d) > 1e-10) {
                 run_1.stop('eigen: matrix is not symmetrical');
             }
@@ -479,35 +479,35 @@ function step() {
 function step2(p, q) {
     // compute c and s
     // from Numerical Recipes (except they have a_qq - a_pp)
-    const theta = (0.5 * (EIG_yydd[EIG_N * p + p] - EIG_yydd[EIG_N * q + q])) /
+    var theta = (0.5 * (EIG_yydd[EIG_N * p + p] - EIG_yydd[EIG_N * q + q])) /
         EIG_yydd[EIG_N * p + q];
     let t = 1.0 / (Math.abs(theta) + Math.sqrt(theta * theta + 1.0));
     if (theta < 0.0) {
         t = -t;
     }
-    const c = 1.0 / Math.sqrt(t * t + 1.0);
-    const s = t * c;
+    var c = 1.0 / Math.sqrt(t * t + 1.0);
+    var s = t * c;
     // D = GD
     // which means "add rows"
     for (let k = 0; k < EIG_N; k++) {
-        const cc = EIG_yydd[EIG_N * p + k];
-        const ss = EIG_yydd[EIG_N * q + k];
+        var cc = EIG_yydd[EIG_N * p + k];
+        var ss = EIG_yydd[EIG_N * q + k];
         EIG_yydd[EIG_N * p + k] = c * cc + s * ss;
         EIG_yydd[EIG_N * q + k] = c * ss - s * cc;
     }
     // D = D transpose(G)
     // which means "add columns"
     for (let k = 0; k < EIG_N; k++) {
-        const cc = EIG_yydd[EIG_N * k + p];
-        const ss = EIG_yydd[EIG_N * k + q];
+        var cc = EIG_yydd[EIG_N * k + p];
+        var ss = EIG_yydd[EIG_N * k + q];
         EIG_yydd[EIG_N * k + p] = c * cc + s * ss;
         EIG_yydd[EIG_N * k + q] = c * ss - s * cc;
     }
     // Q = GQ
     // which means "add rows"
     for (let k = 0; k < EIG_N; k++) {
-        const cc = EIG_yyqq[EIG_N * p + k];
-        const ss = EIG_yyqq[EIG_N * q + k];
+        var cc = EIG_yyqq[EIG_N * p + k];
+        var ss = EIG_yyqq[EIG_N * q + k];
         EIG_yyqq[EIG_N * p + k] = c * cc + s * ss;
         EIG_yyqq[EIG_N * q + k] = c * ss - s * cc;
     }

@@ -1,20 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.arg = exports.Eval_arg = void 0;
-const defs_1 = require("../runtime/defs");
-const stack_1 = require("../runtime/stack");
-const symbol_1 = require("../runtime/symbol");
-const add_1 = require("./add");
-const arctan_1 = require("./arctan");
-const denominator_1 = require("./denominator");
-const eval_1 = require("./eval");
-const imag_1 = require("./imag");
-const is_1 = require("./is");
-const list_1 = require("./list");
-const multiply_1 = require("./multiply");
-const numerator_1 = require("./numerator");
-const real_1 = require("./real");
-const rect_1 = require("./rect");
+let defs_1 = require("../runtime/defs");
+let stack_1 = require("../runtime/stack");
+let symbol_1 = require("../runtime/symbol");
+let add_1 = require("./add");
+let arctan_1 = require("./arctan");
+let denominator_1 = require("./denominator");
+let eval_1 = require("./eval");
+let imag_1 = require("./imag");
+let is_1 = require("./is");
+let list_1 = require("./list");
+let multiply_1 = require("./multiply");
+let numerator_1 = require("./numerator");
+let real_1 = require("./real");
+let rect_1 = require("./rect");
 /* arg =====================================================================
 
 Tags
@@ -78,7 +78,7 @@ Notes
      must be used to get the correct answer. Now the operation is
      automatic.
 */
-const DEBUG_ARG = false;
+let DEBUG_ARG = false;
 function Eval_arg(z) {
     stack_1.push(arg(eval_1.Eval(defs_1.cadr(z))));
 }
@@ -95,7 +95,7 @@ function yyarg(p1) {
             : defs_1.Constants.zero;
     }
     if (is_1.isnegativenumber(p1)) {
-        const pi = defs_1.isdouble(p1) || defs_1.defs.evaluatingAsFloats
+        let pi = defs_1.isdouble(p1) || defs_1.defs.evaluatingAsFloats
             ? defs_1.Constants.piAsDouble
             : defs_1.symbol(defs_1.PI);
         return multiply_1.negate(pi);
@@ -118,7 +118,7 @@ function yyarg(p1) {
         return imag_1.imag(defs_1.caddr(p1));
     }
     if (defs_1.ispower(p1) && is_1.isoneovertwo(defs_1.caddr(p1))) {
-        const arg1 = arg(defs_1.cadr(p1));
+        let arg1 = arg(defs_1.cadr(p1));
         if (DEBUG_ARG) {
             console.log(`arg of a sqrt: ${p1}`);
             defs_1.breakpoint;
@@ -133,8 +133,8 @@ function yyarg(p1) {
     if (defs_1.isadd(p1)) {
         // sum of terms
         p1 = rect_1.rect(p1);
-        const RE = real_1.real(p1);
-        const IM = imag_1.imag(p1);
+        let RE = real_1.real(p1);
+        let IM = imag_1.imag(p1);
         if (is_1.isZeroAtomOrTensor(RE)) {
             if (is_1.isnegative(IM)) {
                 return multiply_1.negate(defs_1.Constants.Pi());
@@ -144,7 +144,7 @@ function yyarg(p1) {
             }
         }
         else {
-            const arg1 = arctan_1.arctan(multiply_1.divide(IM, RE));
+            let arg1 = arctan_1.arctan(multiply_1.divide(IM, RE));
             if (is_1.isnegative(RE)) {
                 if (is_1.isnegative(IM)) {
                     return add_1.subtract(arg1, defs_1.Constants.Pi()); // quadrant 1 -> 3

@@ -1,27 +1,27 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.power = exports.Eval_power = void 0;
-const defs_1 = require("../runtime/defs");
-const find_1 = require("../runtime/find");
-const stack_1 = require("../runtime/stack");
-const symbol_1 = require("../runtime/symbol");
-const misc_1 = require("../sources/misc");
-const abs_1 = require("./abs");
-const add_1 = require("./add");
-const arg_1 = require("./arg");
-const bignum_1 = require("./bignum");
-const conj_1 = require("./conj");
-const cos_1 = require("./cos");
-const dpow_1 = require("./dpow");
-const eval_1 = require("./eval");
-const factorial_1 = require("./factorial");
-const is_1 = require("./is");
-const list_1 = require("./list");
-const multiply_1 = require("./multiply");
-const qpow_1 = require("./qpow");
-const rect_1 = require("./rect");
-const sin_1 = require("./sin");
-const tensor_1 = require("./tensor");
+var defs_1 = require("../runtime/defs");
+var find_1 = require("../runtime/find");
+var stack_1 = require("../runtime/stack");
+var symbol_1 = require("../runtime/symbol");
+var misc_1 = require("../sources/misc");
+var abs_1 = require("./abs");
+var add_1 = require("./add");
+var arg_1 = require("./arg");
+var bignum_1 = require("./bignum");
+var conj_1 = require("./conj");
+var cos_1 = require("./cos");
+var dpow_1 = require("./dpow");
+var eval_1 = require("./eval");
+var factorial_1 = require("./factorial");
+var is_1 = require("./is");
+var list_1 = require("./list");
+var multiply_1 = require("./multiply");
+var qpow_1 = require("./qpow");
+var rect_1 = require("./rect");
+var sin_1 = require("./sin");
+var tensor_1 = require("./tensor");
 /* Power function
 
   Input:    push  Base
@@ -29,13 +29,13 @@ const tensor_1 = require("./tensor");
 
   Output:    Result on stack
 */
-const DEBUG_POWER = false;
+var DEBUG_POWER = false;
 function Eval_power(p1) {
     if (DEBUG_POWER) {
         defs_1.breakpoint;
     }
-    const exponent = eval_1.Eval(defs_1.caddr(p1));
-    const base = eval_1.Eval(defs_1.cadr(p1));
+    var exponent = eval_1.Eval(defs_1.caddr(p1));
+    var base = eval_1.Eval(defs_1.cadr(p1));
     stack_1.push(power(base, exponent));
 }
 exports.Eval_power = Eval_power;
@@ -47,8 +47,8 @@ function yypower(base, exponent) {
     if (DEBUG_POWER) {
         defs_1.breakpoint;
     }
-    const inputExp = exponent;
-    const inputBase = base;
+    var inputExp = exponent;
+    var inputBase = base;
     //breakpoint
     if (DEBUG_POWER) {
         console.log(`POWER: ${base} ^ ${exponent}`);
@@ -57,7 +57,7 @@ function yypower(base, exponent) {
     //  1 ^ a    ->  1
     //  a ^ 0    ->  1
     if (misc_1.equal(base, defs_1.Constants.one) || is_1.isZeroAtomOrTensor(exponent)) {
-        const one = defs_1.Constants.One();
+        var one = defs_1.Constants.One();
         if (DEBUG_POWER) {
             console.log(`   power of ${inputBase} ^ ${inputExp}: ${one}`);
         }
@@ -72,7 +72,7 @@ function yypower(base, exponent) {
     }
     //   -1 ^ -1    ->  -1
     if (is_1.isminusone(base) && is_1.isminusone(exponent)) {
-        const negOne = multiply_1.negate(defs_1.Constants.One());
+        var negOne = multiply_1.negate(defs_1.Constants.One());
         if (DEBUG_POWER) {
             console.log(`   power of ${inputBase} ^ ${inputExp}: ${negOne}`);
         }
@@ -80,7 +80,7 @@ function yypower(base, exponent) {
     }
     //   -1 ^ 1/2  ->  i
     if (is_1.isminusone(base) && is_1.isoneovertwo(exponent)) {
-        const result = defs_1.Constants.imaginaryunit;
+        var result = defs_1.Constants.imaginaryunit;
         if (DEBUG_POWER) {
             console.log(`   power of ${inputBase} ^ ${inputExp}: ${result}`);
         }
@@ -88,7 +88,7 @@ function yypower(base, exponent) {
     }
     //   -1 ^ -1/2  ->  -i
     if (is_1.isminusone(base) && is_1.isminusoneovertwo(exponent)) {
-        const result = multiply_1.negate(defs_1.Constants.imaginaryunit);
+        var result = multiply_1.negate(defs_1.Constants.imaginaryunit);
         if (DEBUG_POWER) {
             console.log(`   power of ${inputBase} ^ ${inputExp}: ${result}`);
         }
@@ -118,7 +118,7 @@ function yypower(base, exponent) {
         // evaluates clock form into
         // rectangular form. This seems to give
         // slightly better form to some test results.
-        const result = rect_1.rect(tmp);
+        var result = rect_1.rect(tmp);
         if (DEBUG_POWER) {
             console.log(`   power of ${inputBase} ^ ${inputExp}: ${result}`);
         }
@@ -129,7 +129,7 @@ function yypower(base, exponent) {
         if (DEBUG_POWER) {
             console.log('   power: isrational(base) && isrational(exponent)');
         }
-        const result = qpow_1.qpow(base, exponent);
+        var result = qpow_1.qpow(base, exponent);
         if (DEBUG_POWER) {
             console.log(`   power of ${inputBase} ^ ${inputExp}: ${result}`);
         }
@@ -137,7 +137,7 @@ function yypower(base, exponent) {
     }
     // both base and exponent are either rational or double?
     if (defs_1.isNumericAtom(base) && defs_1.isNumericAtom(exponent)) {
-        const result = dpow_1.dpow(bignum_1.nativeDouble(base), bignum_1.nativeDouble(exponent));
+        var result = dpow_1.dpow(bignum_1.nativeDouble(base), bignum_1.nativeDouble(exponent));
         if (DEBUG_POWER) {
             console.log('   power: both base and exponent are either rational or double ');
             console.log('POWER - isNumericAtom(base) && isNumericAtom(exponent)');
@@ -146,7 +146,7 @@ function yypower(base, exponent) {
         return result;
     }
     if (defs_1.istensor(base)) {
-        const result = tensor_1.power_tensor(base, exponent);
+        var result = tensor_1.power_tensor(base, exponent);
         if (DEBUG_POWER) {
             console.log('   power: istensor(base) ');
             console.log(`   power of ${inputBase} ^ ${inputExp}: ${result}`);
@@ -158,7 +158,7 @@ function yypower(base, exponent) {
     if (defs_1.car(base) === defs_1.symbol(defs_1.ABS) &&
         is_1.iseveninteger(exponent) &&
         !is_1.isZeroAtomOrTensor(symbol_1.get_binding(defs_1.symbol(defs_1.ASSUME_REAL_VARIABLES)))) {
-        const result = power(defs_1.cadr(base), exponent);
+        var result = power(defs_1.cadr(base), exponent);
         if (DEBUG_POWER) {
             console.log('   power: even power of absolute of real value ');
             console.log(`   power of ${inputBase} ^ ${inputExp}: ${result}`);
@@ -167,7 +167,7 @@ function yypower(base, exponent) {
     }
     // e^log(...)
     if (base === defs_1.symbol(defs_1.E) && defs_1.car(exponent) === defs_1.symbol(defs_1.LOG)) {
-        const result = defs_1.cadr(exponent);
+        var result = defs_1.cadr(exponent);
         if (DEBUG_POWER) {
             console.log(`   power of ${inputBase} ^ ${inputExp}: ${result}`);
         }
@@ -175,7 +175,7 @@ function yypower(base, exponent) {
     }
     // e^some_float
     if (base === defs_1.symbol(defs_1.E) && defs_1.isdouble(exponent)) {
-        const result = bignum_1.double(Math.exp(exponent.d));
+        var result = bignum_1.double(Math.exp(exponent.d));
         if (DEBUG_POWER) {
             console.log('   power: base == symbol(E) && isdouble(exponent) ');
             console.log(`   power of ${inputBase} ^ ${inputExp}: ${result}`);
@@ -193,7 +193,7 @@ function yypower(base, exponent) {
         if (DEBUG_POWER) {
             console.log(`   power: turning complex exponential to rect: ${stack_1.top()}`);
         }
-        const hopefullySimplified = rect_1.rect(tmp); // put new (hopefully simplified expr) in exponent
+        var hopefullySimplified = rect_1.rect(tmp); // put new (hopefully simplified expr) in exponent
         if (!find_1.Find(hopefullySimplified, defs_1.symbol(defs_1.PI))) {
             if (DEBUG_POWER) {
                 console.log(`   power: turned complex exponential to rect: ${hopefullySimplified}`);
@@ -234,7 +234,7 @@ function yypower(base, exponent) {
     if (defs_1.ispower(base) && // when c is an integer
         (is_1.isinteger(exponent) || is_a_moreThanZero) // when a is >= 0
     ) {
-        const result = power(defs_1.cadr(base), multiply_1.multiply(defs_1.caddr(base), exponent));
+        var result = power(defs_1.cadr(base), multiply_1.multiply(defs_1.caddr(base), exponent));
         if (DEBUG_POWER) {
             console.log(`   power of ${inputBase} ^ ${inputExp}: ${result}`);
         }
@@ -242,13 +242,13 @@ function yypower(base, exponent) {
     }
     let b_isEven_and_c_isItsInverse = false;
     if (is_1.iseveninteger(defs_1.caddr(base))) {
-        const isThisOne = multiply_1.multiply(defs_1.caddr(base), exponent);
+        var isThisOne = multiply_1.multiply(defs_1.caddr(base), exponent);
         if (is_1.isone(isThisOne)) {
             b_isEven_and_c_isItsInverse = true;
         }
     }
     if (defs_1.ispower(base) && b_isEven_and_c_isItsInverse) {
-        const result = abs_1.abs(defs_1.cadr(base));
+        var result = abs_1.abs(defs_1.cadr(base));
         if (DEBUG_POWER) {
             console.log('   power: car(base) == symbol(POWER) && b_isEven_and_c_isItsInverse ');
             console.log(`   power of ${inputBase} ^ ${inputExp}: ${result}`);
@@ -258,7 +258,7 @@ function yypower(base, exponent) {
     //  when expanding,
     //  (a + b) ^ n  ->  (a + b) * (a + b) ...
     if (defs_1.defs.expanding && defs_1.isadd(base) && defs_1.isNumericAtom(exponent)) {
-        const n = bignum_1.nativeInt(exponent);
+        var n = bignum_1.nativeInt(exponent);
         if (n > 1 && !isNaN(n)) {
             if (DEBUG_POWER) {
                 console.log('   power: expanding && isadd(base) && isNumericAtom(exponent) ');
@@ -274,7 +274,7 @@ function yypower(base, exponent) {
     if (defs_1.defs.trigmode === 1 &&
         defs_1.car(base) === defs_1.symbol(defs_1.SIN) &&
         is_1.iseveninteger(exponent)) {
-        const result = power(add_1.subtract(defs_1.Constants.one, power(cos_1.cosine(defs_1.cadr(base)), bignum_1.integer(2))), multiply_1.multiply(exponent, bignum_1.rational(1, 2)));
+        var result = power(add_1.subtract(defs_1.Constants.one, power(cos_1.cosine(defs_1.cadr(base)), bignum_1.integer(2))), multiply_1.multiply(exponent, bignum_1.rational(1, 2)));
         if (DEBUG_POWER) {
             console.log('   power: trigmode == 1 && car(base) == symbol(SIN) && iseveninteger(exponent) ');
             console.log(`   power of ${inputBase} ^ ${inputExp}: ${result}`);
@@ -285,7 +285,7 @@ function yypower(base, exponent) {
     if (defs_1.defs.trigmode === 2 &&
         defs_1.car(base) === defs_1.symbol(defs_1.COS) &&
         is_1.iseveninteger(exponent)) {
-        const result = power(add_1.subtract(defs_1.Constants.one, power(sin_1.sine(defs_1.cadr(base)), bignum_1.integer(2))), multiply_1.multiply(exponent, bignum_1.rational(1, 2)));
+        var result = power(add_1.subtract(defs_1.Constants.one, power(sin_1.sine(defs_1.cadr(base)), bignum_1.integer(2))), multiply_1.multiply(exponent, bignum_1.rational(1, 2)));
         if (DEBUG_POWER) {
             console.log('   power: trigmode == 2 && car(base) == symbol(COS) && iseveninteger(exponent) ');
             console.log(`   power of ${inputBase} ^ ${inputExp}: ${result}`);
@@ -305,7 +305,7 @@ function yypower(base, exponent) {
             // (a + ib)   = | -------- |
             //              |   2   2  |
             //               \ a + b  /
-            const p3 = conj_1.conjugate(base);
+            var p3 = conj_1.conjugate(base);
             // gets the denominator
             let result = multiply_1.divide(p3, multiply_1.multiply(p3, base));
             if (!is_1.isone(exponent)) {
@@ -323,7 +323,7 @@ function yypower(base, exponent) {
             // need to evaluate PI to its actual double
             // value
             //console.log("power pushing PI when base is: " + base + " and exponent is:" + exponent)
-            const pi = defs_1.defs.evaluatingAsFloats ||
+            var pi = defs_1.defs.evaluatingAsFloats ||
                 (is_1.iscomplexnumberdouble(base) && defs_1.isdouble(exponent))
                 ? bignum_1.double(Math.PI)
                 : defs_1.symbol(defs_1.PI);
@@ -342,14 +342,14 @@ function yypower(base, exponent) {
             return tmp;
         }
     }
-    const polarResult = simplify_polar(exponent);
+    var polarResult = simplify_polar(exponent);
     if (polarResult !== undefined) {
         if (DEBUG_POWER) {
             console.log('   power: using simplify_polar');
         }
         return polarResult;
     }
-    const result = list_1.makeList(defs_1.symbol(defs_1.POWER), base, exponent);
+    var result = list_1.makeList(defs_1.symbol(defs_1.POWER), base, exponent);
     if (DEBUG_POWER) {
         console.log('   power: nothing can be done ');
         console.log(`   power of ${inputBase} ^ ${inputExp}: ${result}`);
@@ -380,11 +380,11 @@ function yypower(base, exponent) {
 // first index is the term number 0..k-1, second index is the exponent 0..n
 //define A(i, j) frame[(i) * (n + 1) + (j)]
 function power_sum(n, p1) {
-    const a = [];
+    var a = [];
     // number of terms in the sum
-    const k = misc_1.length(p1) - 1;
+    var k = misc_1.length(p1) - 1;
     // array of powers
-    const powers = [];
+    var powers = [];
     p1 = defs_1.cdr(p1);
     for (let i = 0; i < k; i++) {
         for (let j = 0; j <= n; j++) {

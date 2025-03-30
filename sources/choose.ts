@@ -29,8 +29,8 @@ For example, the number of five card hands is choose(52,5)
 ```
 */
 export function Eval_choose(p1: U) {
-  const N = Eval(cadr(p1));
-  const K = Eval(caddr(p1));
+  let N = Eval(cadr(p1));
+  let K = Eval(caddr(p1));
   return choose(N, K);
 }
 

@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.polar = exports.Eval_polar = void 0;
-const defs_1 = require("../runtime/defs");
-const stack_1 = require("../runtime/stack");
-const misc_1 = require("../sources/misc");
-const abs_1 = require("./abs");
-const arg_1 = require("./arg");
-const eval_1 = require("./eval");
-const multiply_1 = require("./multiply");
+let defs_1 = require("../runtime/defs");
+let stack_1 = require("../runtime/stack");
+let misc_1 = require("../sources/misc");
+let abs_1 = require("./abs");
+let arg_1 = require("./arg");
+let eval_1 = require("./eval");
+let multiply_1 = require("./multiply");
 /*
 Convert complex z to polar form
 
@@ -17,7 +17,7 @@ Convert complex z to polar form
   polar(z) = abs(z) * exp(i * arg(z))
 */
 function Eval_polar(p1) {
-    const result = polar(eval_1.Eval(defs_1.cadr(p1)));
+    let result = polar(eval_1.Eval(defs_1.cadr(p1)));
     stack_1.push(result);
 }
 exports.Eval_polar = Eval_polar;

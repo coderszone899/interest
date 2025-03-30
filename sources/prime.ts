@@ -17,7 +17,7 @@ export function Eval_prime(p1: U) {
 }
 
 function prime(p1: U) {
-  let n = nativeInt(p1);
+  const n = nativeInt(p1);
   if (n < 1 || n > MAXPRIMETAB) {
     stop('prime: Argument out of range.');
   }

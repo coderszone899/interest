@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Eval_choose = void 0;
-const defs_1 = require("../runtime/defs");
-const stack_1 = require("../runtime/stack");
-const misc_1 = require("../sources/misc");
-const add_1 = require("./add");
-const eval_1 = require("./eval");
-const factorial_1 = require("./factorial");
-const multiply_1 = require("./multiply");
+let defs_1 = require("../runtime/defs");
+let stack_1 = require("../runtime/stack");
+let misc_1 = require("../sources/misc");
+let add_1 = require("./add");
+let eval_1 = require("./eval");
+let factorial_1 = require("./factorial");
+let multiply_1 = require("./multiply");
 /* choose =====================================================================
 
 Tags
@@ -32,9 +32,9 @@ For example, the number of five card hands is choose(52,5)
 ```
 */
 function Eval_choose(p1) {
-    const N = eval_1.Eval(defs_1.cadr(p1));
-    const K = eval_1.Eval(defs_1.caddr(p1));
-    const result = choose(N, K);
+    let N = eval_1.Eval(defs_1.cadr(p1));
+    let K = eval_1.Eval(defs_1.caddr(p1));
+    let result = choose(N, K);
     stack_1.push(result);
 }
 exports.Eval_choose = Eval_choose;

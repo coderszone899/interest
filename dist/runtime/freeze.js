@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const print_1 = require("../sources/print");
-const defs_1 = require("./defs");
+var print_1 = require("../sources/print");
+var defs_1 = require("./defs");
 function freeze() {
-    const frozenSymbols = [];
-    const frozenContents = [];
+    var frozenSymbols = [];
+    var frozenContents = [];
     let frozenPatterns = [];
-    const frozenHash = '';
+    var frozenHash = '';
     for (let i = 0; i < defs_1.symtab.length; i++) {
         //if symtab[i].printname == ""
         //  if isSymbolReclaimable[i] == false
@@ -48,7 +48,7 @@ function unfreeze(frozen) {
     return (defs_1.defs.userSimplificationsInListForm = frozenPatterns.slice(0));
 }
 function compareState(previousHash) {
-    const frozenHash = getStateHash();
+    var frozenHash = getStateHash();
     return frozenHash === previousHash;
 }
 function getStateHash() {
@@ -62,11 +62,11 @@ function getStateHash() {
                 continue;
             }
         }
-        const symtabi = print_1.print_list(defs_1.symtab[i]);
-        const bindingi = print_1.print_list(defs_1.binding[i]);
+        var symtabi = print_1.print_list(defs_1.symtab[i]);
+        var bindingi = print_1.print_list(defs_1.binding[i]);
         frozenHash += ' //' + symtabi + ' : ' + bindingi;
     }
-    for (const i of Array.from(defs_1.defs.userSimplificationsInListForm)) {
+    for (var i of Array.from(defs_1.defs.userSimplificationsInListForm)) {
         frozenHash += ' pattern: ' + i;
     }
     if (defs_1.DEBUG) {

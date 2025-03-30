@@ -49,9 +49,9 @@ export function cosine(p1: U): U {
 // Use angle sum formula for special angles.
 function cosine_of_angle_sum(p1: U): U {
   if (iscons(p1)) {
-    for (const B of p1.tail()) {
+    for (var B of p1.tail()) {
       if (isnpi(B)) {
-        const A = subtract(p1, B);
+        var A = subtract(p1, B);
         return subtract(
           multiply(cosine(A), cosine(B)),
           multiply(sine(A), sine(B))
@@ -86,7 +86,7 @@ function cosine_of_angle(p1: U): U {
   // see p. 173 of the CRC Handbook of Mathematical Sciences
 
   if (car(p1) === symbol(ARCTAN)) {
-    const base = add(Constants.one, power(cadr(p1), integer(2)));
+    var base = add(Constants.one, power(cadr(p1), integer(2)));
     return power(base, rational(-1, 2));
   }
 
@@ -100,7 +100,7 @@ function cosine_of_angle(p1: U): U {
   // convoluted as we'd need to look at both numerator and
   // denominator.
 
-  const n = nativeInt(divide(multiply(p1, integer(180)), Constants.Pi()));
+  var n = nativeInt(divide(multiply(p1, integer(180)), Constants.Pi()));
 
   // most "good" (i.e. compact) trigonometric results
   // happen for a round number of degrees. There are some exceptions

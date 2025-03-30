@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Eval_arccosh = void 0;
-var defs_1 = require("../runtime/defs");
-var run_1 = require("../runtime/run");
-var stack_1 = require("../runtime/stack");
-var bignum_1 = require("./bignum");
-var eval_1 = require("./eval");
-var is_1 = require("./is");
-var list_1 = require("./list");
+const defs_1 = require("../runtime/defs");
+const run_1 = require("../runtime/run");
+const stack_1 = require("../runtime/stack");
+const bignum_1 = require("./bignum");
+const eval_1 = require("./eval");
+const is_1 = require("./is");
+const list_1 = require("./list");
 /* arccosh =====================================================================
 
 Tags

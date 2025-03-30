@@ -38,7 +38,7 @@ function arcsinh(x: U): U {
   }
 
   if (isdouble(x)) {
-    let { d } = x;
+    const { d } = x;
     d = Math.log(d + Math.sqrt(d * d + 1.0));
     return double(d);
   }

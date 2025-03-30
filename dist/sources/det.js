@@ -1,14 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.determinant = exports.det = void 0;
-const defs_1 = require("../runtime/defs");
-const stack_1 = require("../runtime/stack");
-const misc_1 = require("../sources/misc");
-const add_1 = require("./add");
-const bignum_1 = require("./bignum");
-const list_1 = require("./list");
-const multiply_1 = require("./multiply");
-const tensor_1 = require("./tensor");
+var defs_1 = require("../runtime/defs");
+var stack_1 = require("../runtime/stack");
+var misc_1 = require("../sources/misc");
+var add_1 = require("./add");
+var bignum_1 = require("./bignum");
+var list_1 = require("./list");
+var multiply_1 = require("./multiply");
+var tensor_1 = require("./tensor");
 /* det =====================================================================
 
 Tags
@@ -34,8 +34,8 @@ function det(p1) {
     if (!tensor_1.is_square_matrix(p1)) {
         return list_1.makeList(defs_1.symbol(defs_1.DET), p1);
     }
-    const a = p1.tensor.elem;
-    const isNumeric = a.every((element) => defs_1.isNumericAtom(element));
+    var a = p1.tensor.elem;
+    var isNumeric = a.every((element) => defs_1.isNumericAtom(element));
     if (isNumeric) {
         return yydetg(p1);
     }
@@ -47,7 +47,7 @@ exports.det = det;
 // determinant of n * n matrix elements on the stack
 function determinant(elements, n) {
     let q = 0;
-    const a = [];
+    var a = [];
     //int *a, *c, *d
     //a = (int *) malloc(3 * n * sizeof (int))
     //if (a == NULL)
@@ -62,7 +62,7 @@ function determinant(elements, n) {
     while (true) {
         let temp = bignum_1.integer(sign_);
         for (let i = 0; i < n; i++) {
-            const k = n * a[i] + i;
+            var k = n * a[i] + i;
             temp = multiply_1.multiply(temp, elements[k]); // FIXME -- problem here
         }
         outerTemp = add_1.add(outerTemp, temp);
@@ -92,7 +92,7 @@ function determinant(elements, n) {
         if (breakFromOutherWhile) {
             break;
         }
-        const t = a[j - a[n + j] + s];
+        var t = a[j - a[n + j] + s];
         a[j - a[n + j] + s] = a[j - q + s];
         a[j - q + s] = t;
         a[n + j] = q;
@@ -116,7 +116,7 @@ exports.determinant = determinant;
 //
 //-----------------------------------------------------------------------------
 function detg() {
-    const p1 = stack_1.pop();
+    var p1 = stack_1.pop();
     if (!tensor_1.is_square_matrix(p1)) {
         stack_1.push(list_1.makeList(defs_1.symbol(defs_1.DET), p1));
         return;
@@ -124,9 +124,9 @@ function detg() {
     stack_1.push(yydetg(p1));
 }
 function yydetg(p1) {
-    const n = p1.tensor.dim[0];
-    const elements = [...p1.tensor.elem];
-    const decomp = lu_decomp(elements, n);
+    var n = p1.tensor.dim[0];
+    var elements = [...p1.tensor.elem];
+    var decomp = lu_decomp(elements, n);
     return decomp;
 }
 function getM(arr, n, i, j) {
@@ -169,11 +169,11 @@ function lu_decomp(elements, n) {
         p1 = multiply_1.multiply(p1, getM(elements, n, d, d));
         // update lower diagonal matrix
         for (let i = d + 1; i < n; i++) {
-            const p2 = multiply_1.negate(multiply_1.divide(getM(elements, n, i, d), getM(elements, n, d, d)));
+            var p2 = multiply_1.negate(multiply_1.divide(getM(elements, n, i, d), getM(elements, n, d, d)));
             // update one row
             setM(elements, n, i, d, defs_1.Constants.zero); // clear column below pivot d
             for (let j = d + 1; j < n; j++) {
-                const added = add_1.add(multiply_1.multiply(getM(elements, n, d, j), p2), getM(elements, n, i, j));
+                var added = add_1.add(multiply_1.multiply(getM(elements, n, d, j), p2), getM(elements, n, i, j));
                 setM(elements, n, i, j, added);
             }
         }

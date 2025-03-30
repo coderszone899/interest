@@ -1,15 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sgn = exports.Eval_sgn = void 0;
-const defs_1 = require("../runtime/defs");
-const stack_1 = require("../runtime/stack");
-const abs_1 = require("./abs");
-const eval_1 = require("./eval");
-const is_1 = require("./is");
-const list_1 = require("./list");
-const mmul_1 = require("./mmul");
-const multiply_1 = require("./multiply");
-const power_1 = require("./power");
+let defs_1 = require("../runtime/defs");
+let stack_1 = require("../runtime/stack");
+let abs_1 = require("./abs");
+let eval_1 = require("./eval");
+let is_1 = require("./is");
+let list_1 = require("./list");
+let mmul_1 = require("./mmul");
+let multiply_1 = require("./multiply");
+let power_1 = require("./power");
 //-----------------------------------------------------------------------------
 //
 //  Author : philippe.billet@noos.fr
@@ -19,7 +19,7 @@ const power_1 = require("./power");
 //
 //-----------------------------------------------------------------------------
 function Eval_sgn(p1) {
-    const result = sgn(eval_1.Eval(defs_1.cadr(p1)));
+    let result = sgn(eval_1.Eval(defs_1.cadr(p1)));
     stack_1.push(result);
 }
 exports.Eval_sgn = Eval_sgn;

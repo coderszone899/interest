@@ -4,15 +4,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.evalFloats = exports.evalPolar = exports.doexpand = exports.noexpand = exports.Constants = exports.$ = exports.reset_after_error = exports.MEQUAL = exports.MZERO = exports.MSIGN = exports.isidentitymatrix = exports.isinv = exports.istranspose = exports.isinnerordot = exports.isfactorial = exports.ispower = exports.ismultiply = exports.isadd = exports.caddaddr = exports.cdddaddr = exports.caddadr = exports.cddaddr = exports.cadaddr = exports.caddddr = exports.cddddr = exports.cadddr = exports.cdaddr = exports.caddar = exports.cadadr = exports.caaddr = exports.cdddr = exports.cddar = exports.cdadr = exports.cadar = exports.caddr = exports.caadr = exports.cddr = exports.cdar = exports.cadr = exports.caar = exports.cdr = exports.car = exports.iskeyword = exports.issymbol = exports.isNumericAtomOrTensor = exports.istensor = exports.isstr = exports.isNumericAtom = exports.isdouble = exports.isrational = exports.iscons = exports.symbol = exports.dotprod_unicode = exports.transpose_unicode = exports.isSymbolReclaimable = exports.binding = exports.symtab = exports.logbuf = exports.mtotal = exports.primetab = exports.parse_time_simplifications = exports.predefinedSymbolsInGlobalScope_doNotTrackInDependencies = exports.MAXDIM = exports.MAX_CONSECUTIVE_APPLICATIONS_OF_SINGLE_RULE = exports.MAX_CONSECUTIVE_APPLICATIONS_OF_ALL_RULES = exports.MAXPRIMETAB = exports.TOS = exports.E = exports.C6 = exports.C5 = exports.C4 = exports.C3 = exports.C2 = exports.C1 = exports.SYMBOL_X_UNDERSCORE = exports.SYMBOL_B_UNDERSCORE = exports.SYMBOL_A_UNDERSCORE = exports.SYMBOL_IDENTITY_MATRIX = exports.SYMBOL_Z = exports.SYMBOL_Y = exports.SYMBOL_X = exports.SYMBOL_T = exports.SYMBOL_S = exports.SYMBOL_R = exports.SYMBOL_N = exports.SYMBOL_J = exports.SYMBOL_I = exports.SYMBOL_D = exports.SYMBOL_C = exports.SYMBOL_B = exports.SYMBOL_A = exports.PI = exports.VERSION = exports.SECRETX = exports.METAX = exports.METAB = exports.METAA = exports.DRAWX = exports.YYE = exports.MAX_FIXED_PRINTOUT_DIGITS = exports.FORCE_FIXED_PRINTOUT = exports.TRACE = exports.ASSUME_REAL_VARIABLES = exports.BAKE = exports.AUTOEXPAND = exports.LAST_PLAIN_PRINT = exports.LAST_LIST_PRINT = exports.LAST_LATEX_PRINT = exports.LAST_FULL_PRINT = exports.LAST_2DASCII_PRINT = exports.LAST_PRINT = exports.LAST = exports.NIL = exports.ZERO = exports.UNIT = exports.TRANSPOSE = exports.TESTLT = exports.TESTLE = exports.TESTGT = exports.TESTGE = exports.TESTEQ = exports.TEST = exports.TAYLOR = exports.TANH = exports.TAN = exports.SYMBOLSINFO = exports.SUM = exports.SUBST = exports.STOP = exports.SQRT = exports.SHAPE = exports.SINH = exports.SIN = exports.SIMPLIFY = exports.SILENTPATTERN = exports.SGN = exports.SETQ = exports.ROOTS = exports.YYRECT = exports.ROUND = exports.REAL = exports.RATIONALIZE = exports.RANK = exports.QUOTIENT = exports.QUOTE = exports.PRODUCT = exports.PRINTPLAIN = exports.PRINTLIST = exports.PRINTLATEX = exports.PRINTFULL = exports.PRINT2DASCII = exports.PRINT = exports.PRINT_LEAVE_X_ALONE = exports.PRINT_LEAVE_E_ALONE = exports.PRIME = exports.POWER = exports.POLAR = exports.PATTERNSINFO = exports.PATTERN = exports.OUTER = exports.OR = exports.OPERATOR = exports.NUMERATOR = exports.NUMBER = exports.NROOTS = exports.NOT = exports.MULTIPLY = exports.MOD = exports.LOOKUP = exports.LOG = exports.LEGENDRE = exports.LEADING = exports.LCM = exports.LAGUERRE = exports.ISPRIME = exports.ISINTEGER = exports.INVG = exports.INV = exports.INTEGRAL = exports.INNER = exports.INDEX = exports.IMAG = exports.HILBERT = exports.HERMITE = exports.GCD = exports.GAMMA = exports.FUNCTION = exports.FOR = exports.FLOOR = exports.FLOATF = exports.FILTER = exports.FACTORPOLY = exports.FACTORIAL = exports.FACTOR = exports.EXPSIN = exports.EXPCOS = exports.EXPAND = exports.EXP = exports.EVAL = exports.ERFC = exports.ERF = exports.EIGENVEC = exports.EIGENVAL = exports.EIGEN = exports.DSOLVE = exports.DRAW = exports.DOT = exports.DO = exports.DIVISORS = exports.DIRAC = exports.DIM = exports.DET = exports.DERIVATIVE = exports.DENOMINATOR = exports.DEGREE = exports.DEFINT = exports.DECOMP = exports.COSH = exports.COS = exports.CONTRACT = exports.CONJ = exports.CONDENSE = exports.COFACTOR = exports.COEFF = exports.CLOCK = exports.CLEARPATTERNS = exports.CLEARALL = exports.CLEAR = exports.CIRCEXP = exports.CHOOSE = exports.CHECK = exports.CEILING = exports.BINOMIAL = exports.BINDING = exports.BESSELY = exports.BESSELJ = exports.ATOMIZE = exports.ARG = exports.ARCTANH = exports.ARCTAN = exports.ARCSINH = exports.ARCSIN = exports.ARCCOSH = exports.ARCCOS = exports.APPROXRATIO = exports.AND = exports.ADJ = exports.ADD = exports.ABS = exports.SYM = exports.TENSOR = exports.STR = exports.DOUBLE = exports.NUM = exports.CONS = exports.Sym = exports.Tensor = exports.Str = exports.Double = exports.Num = exports.Cons = exports.BaseAtom = exports.avoidCalculatingPowersIntoArctans = exports.do_simplify_nested_radicals = exports.dontCreateNewRadicalsInDenominatorWhenEvalingMultiplication = exports.defs = exports.PRINTMODE_LIST = exports.PRINTMODE_HUMAN = exports.PRINTMODE_COMPUTER = exports.PRINTMODE_2DASCII = exports.PRINTMODE_LATEX = exports.PRINTOUTRESULT = exports.DEBUG = exports.NSYM = exports.version = exports.breakpoint = void 0;
-const big_integer_1 = __importDefault(require("big-integer"));
-const stack_1 = require("./stack");
-const print_1 = require("../sources/print");
-const symbol_1 = require("./symbol");
+var big_integer_1 = __importDefault(require("big-integer"));
+var stack_1 = require("./stack");
+var print_1 = require("../sources/print");
+var symbol_1 = require("./symbol");
 function breakpoint() { }
 exports.breakpoint = breakpoint;
 // also change the version in the package.json file
 exports.version = '1.3.1';
-const SELFTEST = 1;
+var SELFTEST = 1;
 // size of the symbol table
 exports.NSYM = 1000;
 exports.DEBUG = false;
@@ -114,7 +114,7 @@ class Cons extends BaseAtom {
         return [];
     }
     map(f) {
-        const a = car(this);
+        var a = car(this);
         let b = cdr(this);
         if (iscons(b)) {
             b = b.map(f);
@@ -365,7 +365,7 @@ exports.C3 = counter++;
 exports.C4 = counter++;
 exports.C5 = counter++;
 exports.C6 = counter++;
-const USR_SYMBOLS = counter++; // this must be last
+var USR_SYMBOLS = counter++; // this must be last
 exports.E = exports.YYE;
 // TOS cannot be arbitrarily large because the OS seg faults on deep recursion.
 // For example, a circular evaluation like x=x+1 can cause a seg fault.
@@ -410,11 +410,11 @@ exports.predefinedSymbolsInGlobalScope_doNotTrackInDependencies = [
 // etc.
 exports.parse_time_simplifications = true;
 exports.primetab = (function () {
-    const primes = [2];
+    var primes = [2];
     let i = 3;
     while (primes.length < exports.MAXPRIMETAB) {
         let j = 0;
-        const ceil = Math.sqrt(i);
+        var ceil = Math.sqrt(i);
         while (j < primes.length && primes[j] <= ceil) {
             if (i % primes[j] === 0) {
                 j = -1;
@@ -439,8 +439,8 @@ exports.symtab = [];
 // in the corresponding position in symtab array
 exports.binding = [];
 exports.isSymbolReclaimable = [];
-const arglist = []; // will contain U
-const draw_stop_return = null; // extern jmp_buf ?????
+var arglist = []; // will contain U
+var draw_stop_return = null; // extern jmp_buf ?????
 exports.transpose_unicode = 7488;
 exports.dotprod_unicode = 183;
 function symbol(x) {
@@ -481,8 +481,8 @@ function isNumericAtomOrTensor(p) {
         //console.log "p not an atom nor a tensor: " + p
         return false;
     }
-    const n = p.tensor.nelem;
-    const a = p.tensor.elem;
+    var n = p.tensor.nelem;
+    var a = p.tensor.elem;
     for (let i = 0; i < n; i++) {
         if (!isNumericAtomOrTensor(a[i])) {
             //console.log "non-numeric element: " + a[i]
@@ -703,7 +703,7 @@ Constants.zeroAsDouble = new Double(0.0);
 Constants.piAsDouble = new Double(Math.PI);
 // Call a function temporarily setting "expanding" to false
 function noexpand(func, ...args) {
-    const prev_expanding = exports.defs.expanding;
+    var prev_expanding = exports.defs.expanding;
     exports.defs.expanding = false;
     try {
         return func(...args);
@@ -715,7 +715,7 @@ function noexpand(func, ...args) {
 exports.noexpand = noexpand;
 // Call a function temporarily setting "expanding" to true
 function doexpand(func, ...args) {
-    const prev_expanding = exports.defs.expanding;
+    var prev_expanding = exports.defs.expanding;
     exports.defs.expanding = true;
     try {
         return func(...args);
@@ -727,7 +727,7 @@ function doexpand(func, ...args) {
 exports.doexpand = doexpand;
 // Call a function temporarily setting "evaluatingPolar" to true
 function evalPolar(func, ...args) {
-    const prev_evaluatingPolar = exports.defs.evaluatingPolar;
+    var prev_evaluatingPolar = exports.defs.evaluatingPolar;
     exports.defs.evaluatingPolar = true;
     try {
         return func(...args);
@@ -739,7 +739,7 @@ function evalPolar(func, ...args) {
 exports.evalPolar = evalPolar;
 // Call a function temporarily setting "evaluatingAsFloats" to true
 function evalFloats(func, ...args) {
-    const prev_evaluatingAsFloats = exports.defs.evaluatingAsFloats;
+    var prev_evaluatingAsFloats = exports.defs.evaluatingAsFloats;
     exports.defs.evaluatingAsFloats = true;
     try {
         return func(...args);

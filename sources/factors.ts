@@ -17,7 +17,7 @@ import { isadd, ismultiply, U } from '../runtime/defs';
 //
 // but not necessarily in that order. Returns the number of factors.
 export function factors(p: U): U[] {
-  const result: U[] = [];
+  let result: U[] = [];
   if (isadd(p)) {
     p.tail().forEach((el) => result.push(...term_factors(el)));
   } else {

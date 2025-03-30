@@ -23,29 +23,29 @@ import { Eval, evaluate_integer } from './eval';
 // leaves the sum at the top of the stack
 export function Eval_sum(p1: U) {
   // 1st arg
-  const body = cadr(p1);
+  var body = cadr(p1);
 
   // 2nd arg (index)
-  const indexVariable = caddr(p1);
+  var indexVariable = caddr(p1);
   if (!issymbol(indexVariable)) {
     stop('sum: 2nd arg?');
   }
 
   // 3rd arg (lower limit)
-  const j = evaluate_integer(cadddr(p1));
+  var j = evaluate_integer(cadddr(p1));
   if (isNaN(j)) {
     return p1;
   }
 
   // 4th arg (upper limit)
-  const k = evaluate_integer(caddddr(p1));
+  var k = evaluate_integer(caddddr(p1));
   if (isNaN(k)) {
     return p1;
   }
 
   // remember contents of the index
   // variable so we can put it back after the loop
-  const p4 = get_binding(indexVariable);
+  var p4 = get_binding(indexVariable);
 
   let temp: U = Constants.zero;
   for (let i = j; i <= k; i++) {
